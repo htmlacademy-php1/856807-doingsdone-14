@@ -14,6 +14,50 @@ $show_complete_tasks = rand(0, 1);
 </head>
 
 <body>
+<!--добавляю простой ($categories) и двухмерный массив ($tasks) -->
+<?php
+//простой ($categories)
+$categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+//двухмерный массив ($tasks)
+$tasks = [
+    [
+    'Задача' => 'Собеседование в IT компании',
+    'Дата выполнения' => '01.12.2019',
+    'Категория' => 'Работа',
+    'Выполнен' => false
+    ],
+    [
+    'Задача' => 'Выполнить тестовое задание',
+    'Дата выполнения' => '25.12.2019',
+    'Категория' => 'Работа',
+    'Выполнен' => false
+    ],
+    [
+    'Задача' => 'Сделать задание первого раздела',
+    'Дата выполнения' => '21.12.2019',
+    'Категория' => 'Учеба',
+    'Выполнен' => true
+    ],
+    [
+    'Задача' => 'Встреча с другом',
+    'Дата выполнения' => '22.12.2019',
+    'Категория' => 'Входящие',
+    'Выполнен' => false
+    ],
+    [
+    'Задача' => 'Купить корм для кота',
+    'Дата выполнения' => null,
+    'Категория' => 'Домашние дела',
+    'Выполнен' => false
+    ],
+    [
+    'Задача' => 'Заказать пиццу',
+    'Дата выполнения' => null,
+    'Категория' => 'Домашние дела',
+    'Выполнен' => false
+    ]
+        ];
+?>
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -39,13 +83,14 @@ $show_complete_tasks = rand(0, 1);
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php foreach ($categories as $val): ?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?= $val?></a>
+                                <span class="main-navigation__list-item-count">0</span>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </nav>
 
@@ -78,6 +123,23 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
+                <!--Делаю замену строк таблицы через разбор двухмерного массива {if ($show_complete_tasks == null) continue;}-->
+                <?php foreach ($tasks as $task) {?>
+                    <?php if ($task['Выполнен'] == true && $show_complete_tasks == null) continue; ?>
+                        <tr class="tasks__item task <?php if ($task['Выполнен']): ?> task--completed <?php endif; ?>">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                    <span class="checkbox__text"><?= $task['Задача'] ?></span>
+                                </label>
+                            </td>
+                            <td class="task__file">
+                                <a class="download-link" href="#">Home.psd</a>
+                            </td>
+                            <td class="task__date"></td>
+                        </tr>                    
+                <?php } ?>
+                <!--Демо-код легаси
                     <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
@@ -91,7 +153,8 @@ $show_complete_tasks = rand(0, 1);
                         </td>
 
                         <td class="task__date"></td>
-                    </tr>
+                    </tr> 
+                -->
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                 </table>
             </main>
