@@ -14,50 +14,57 @@ $show_complete_tasks = rand(0, 1);
 </head>
 
 <body>
-<!--добавляю простой ($categories) и двухмерный массив ($tasks) -->
+<!--добавляю простой ($categorys) и двухмерный массив ($tasks) -->
 <?php
-//простой ($categories)
-$categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+//простой ($categorys)
+$categories = [
+    'inbox' => 'Входящие',
+    'studies' => 'Учеба', 
+    'work' => 'Работа', 
+    'housework' => 'Домашние дела', 
+    'auto' => 'Авто'
+];
 //двухмерный массив ($tasks)
 $tasks = [
     [
-    'Задача' => 'Собеседование в IT компании',
-    'Дата выполнения' => '01.12.2019',
-    'Категория' => 'Работа',
-    'Выполнен' => false
+    'name' => 'Собеседование в IT компании',
+    'date' => '01.12.2019',
+    'category' => $categories['work'],
+    'done' => false
     ],
     [
-    'Задача' => 'Выполнить тестовое задание',
-    'Дата выполнения' => '25.12.2019',
-    'Категория' => 'Работа',
-    'Выполнен' => false
+    'name' => 'Выполнить тестовое задание',
+    'date' => '25.12.2019',
+    'category' => $categories['work'],
+    'done' => false
     ],
     [
-    'Задача' => 'Сделать задание первого раздела',
-    'Дата выполнения' => '21.12.2019',
-    'Категория' => 'Учеба',
-    'Выполнен' => true
+    'name' => 'Сделать задание первого раздела',
+    'date' => '21.12.2019',
+    'category' => $categories['studies'],
+    'done' => true
     ],
     [
-    'Задача' => 'Встреча с другом',
-    'Дата выполнения' => '22.12.2019',
-    'Категория' => 'Входящие',
-    'Выполнен' => false
+    'name' => 'Встреча с другом',
+    'date' => '22.12.2019',
+    'category' => $categories['inbox'],
+    'done' => false
     ],
     [
-    'Задача' => 'Купить корм для кота',
-    'Дата выполнения' => null,
-    'Категория' => 'Домашние дела',
-    'Выполнен' => false
+    'name' => 'Купить корм для кота',
+    'date' => null,
+    'category' => $categories['housework'],
+    'done' => false
     ],
     [
-    'Задача' => 'Заказать пиццу',
-    'Дата выполнения' => null,
-    'Категория' => 'Домашние дела',
-    'Выполнен' => false
+    'name' => 'Заказать пиццу',
+    'date' => null,
+    'category' => $categories['housework'],
+    'done' => false
     ]
         ];
 ?>
+
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -124,21 +131,21 @@ $tasks = [
 
                 <table class="tasks">
                 <!--Делаю замену строк таблицы через разбор двухмерного массива {if ($show_complete_tasks == null) continue;}-->
-                <?php foreach ($tasks as $task) {?>
-                    <?php if ($task['Выполнен'] == true && $show_complete_tasks == null) continue; ?>
-                        <tr class="tasks__item task <?php if ($task['Выполнен']): ?> task--completed <?php endif; ?>">
+                <?php foreach ($tasks as $task) :?>
+                    <?php if ($task['done'] == true && $show_complete_tasks == null) continue; ?>
+                        <tr class="tasks__item task <?php if ($task['done']): ?> task--completed <?php endif; ?>">
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
                                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                    <span class="checkbox__text"><?= $task['Задача'] ?></span>
+                                    <span class="checkbox__text"><?= $task['name'] ?></span>
                                 </label>
                             </td>
                             <td class="task__file">
                                 <a class="download-link" href="#">Home.psd</a>
                             </td>
                             <td class="task__date"></td>
-                        </tr>                    
-                <?php } ?>
+                    </tr>                    
+                <?php endforeach; ?>
                 <!--Демо-код легаси
                     <tr class="tasks__item task">
                         <td class="task__select">
