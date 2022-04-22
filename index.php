@@ -1,6 +1,22 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+/**
+ * посчитать количество задач в конкретной категории
+ * 
+ * @param array $tasks список всех задач
+ * @param string $category_title индефикатор категории
+ * @return int количество задач в конкретной категории
+ */
+function count_tasks($tasks, $category_title) {
+    $count_task = 0;
+    foreach ($tasks as $task) {
+        if ($task['category'] === $category_title) {
+            $count_task++;
+        }
+    } 
+    return $count_task;
+} 
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -91,10 +107,12 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $category): ?>
+<!--Объявление функции -->  
+<!--Концовка тестов -->
+                        <?php foreach ($categories as $category_alias => $category_title): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $category?></a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                <a class="main-navigation__list-item-link" href="#"><?= $category_title; ?></a>
+                                <span class="main-navigation__list-item-count"><?= count_tasks($tasks, $category_title); ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
