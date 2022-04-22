@@ -14,7 +14,7 @@ $show_complete_tasks = rand(0, 1);
 </head>
 
 <body>
-<!--добавляю простой ($categories) и двухмерный массив ($tasks) -->
+<!--добавляю простой ($categorys) и двухмерный массив ($tasks) -->
 <?php
 //простой ($categories)
 $categories = [
@@ -27,42 +27,43 @@ $categories = [
 $tasks = [
     [
     'name' => 'Собеседование в IT компании',
-    'data' => '01.12.2019',
+    'date' => '01.12.2019',
     'category' => $categories['work'],
     'done' => false
     ],
     [
     'name' => 'Выполнить тестовое задание',
-    'data' => '25.12.2019',
+    'date' => '25.12.2019',
     'category' => $categories['work'],
     'done' => false
     ],
     [
     'name' => 'Сделать задание первого раздела',
-    'data' => '21.12.2019',
+    'date' => '21.12.2019',
     'category' => $categories['studies'],
     'done' => true
     ],
     [
     'name' => 'Встреча с другом',
-    'data' => '22.12.2019',
+    'date' => '22.12.2019',
     'category' => $categories['inbox'],
     'done' => false
     ],
     [
     'name' => 'Купить корм для кота',
-    'data' => null,
+    'date' => null,
     'category' => $categories['housework'],
     'done' => false
     ],
     [
     'name' => 'Заказать пиццу',
-    'data' => null,
+    'date' => null,
     'category' => $categories['housework'],
     'done' => false
     ]
         ];
 ?>
+
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -90,9 +91,9 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $val): ?>
+                        <?php foreach ($categories as $category): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $val?></a>
+                                <a class="main-navigation__list-item-link" href="#"><?= $category?></a>
                                 <span class="main-navigation__list-item-count">0</span>
                             </li>
                         <?php endforeach; ?>
@@ -129,8 +130,8 @@ $tasks = [
 
                 <table class="tasks">
                 <!--Делаю замену строк таблицы через разбор двухмерного массива {if ($show_complete_tasks == null) continue;}-->
-                <?php foreach ($tasks as $task) {?>
-                    <?php if ($task['done'] == true && $show_complete_tasks == null) continue; ?>
+                <?php foreach ($tasks as $task) :?>
+                    <?php if ($task['done'] && $show_complete_tasks) continue; ?>
                         <tr class="tasks__item task <?php if ($task['done']): ?> task--completed <?php endif; ?>">
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
@@ -142,8 +143,8 @@ $tasks = [
                                 <a class="download-link" href="#">Home.psd</a>
                             </td>
                             <td class="task__date"></td>
-                        </tr>                    
-                <?php } ?>
+                    </tr>                    
+                <?php endforeach; ?>
                 <!--Демо-код легаси
                     <tr class="tasks__item task">
                         <td class="task__select">
