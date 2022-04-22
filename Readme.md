@@ -1,7 +1,7 @@
 # Личный проект «Дела в Порядке»
 
-* Студент: [Alexey Apalikhin](https://up.htmlacademy.ru/php/14/user/856807).
-* Наставник: `Неизвестно`.
+- Студент: [Alexey Apalikhin](https://up.htmlacademy.ru/php/14/user/856807).
+- Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
