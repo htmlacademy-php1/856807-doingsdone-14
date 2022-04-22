@@ -92,9 +92,9 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $val): ?>
+                        <?php foreach ($categories as $category): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $val?></a>
+                                <a class="main-navigation__list-item-link" href="#"><?= $category?></a>
                                 <span class="main-navigation__list-item-count">0</span>
                             </li>
                         <?php endforeach; ?>
@@ -132,7 +132,7 @@ $tasks = [
                 <table class="tasks">
                 <!--Делаю замену строк таблицы через разбор двухмерного массива {if ($show_complete_tasks == null) continue;}-->
                 <?php foreach ($tasks as $task) :?>
-                    <?php if ($task['done'] == true && $show_complete_tasks == null) continue; ?>
+                    <?php if ($task['done'] && $show_complete_tasks) continue; ?>
                         <tr class="tasks__item task <?php if ($task['done']): ?> task--completed <?php endif; ?>">
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
