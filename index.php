@@ -107,8 +107,6 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-<!--Объявление функции -->  
-<!--Концовка тестов -->
                         <?php foreach ($categories as $category_alias => $category_title): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#"><?= $category_title; ?></a>
@@ -165,18 +163,16 @@ $tasks = [
                         </tr>                    
                     <?php endforeach; ?>
 
-                    <?php if ($show_complete_tasks): ?>
+                    <?php if ($show_complete_tasks === 1): ?>
                         <tr class="tasks__item task task--completed">
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
+                                    <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                    <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
                                 </label>
                             </td>
                             <td class="task__date">10.10.2019</td>
-
-                            <td class="task__controls">
-                            </td>
+                            <td class="task__controls"></td>
                         </tr>
                     <?php endif ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
