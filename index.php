@@ -45,7 +45,27 @@ $tasks = [
     'done' => false
     ]
 ];
+
 $show_complete_tasks = rand(0, 1);
+
+date_default_timezone_set('Europe/Moscow');
+/**
+ * Проверка задач в дедлайне
+ * @param string $date_time дата выполнения задачи
+ * @return boolean возвращаем true, если задачи осталось < 24 h
+ */
+
+function is_hot_task($date_time) {
+$courant_time = date_create('2022-05-10');
+$task_time = date_create($date_time);
+$dif = date_diff($task_time, $courant_time);
+
+if ($dif['h'] <= 24) {
+    $time_limit = true;
+}
+return $time_limit;
+}
+
 /**
  * посчитать количество задач в конкретной категории
  *
@@ -63,7 +83,6 @@ function count_tasks($tasks, $category_title) {
     return $count_task;
 }
 
-//require_once('templates/layout.php');
 $main_content = include_template("main.php", [
     'categories' => $categories,
     'tasks' => $tasks,
