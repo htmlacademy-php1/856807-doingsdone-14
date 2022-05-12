@@ -56,16 +56,23 @@ date_default_timezone_set('Europe/Moscow');
  */
 
 function is_hot_task($date_time) {
-$courant_time = date_create('2022-05-10');
-$task_time = date_create($date_time);
-$dif = date_diff($task_time, $courant_time);
+    if ($date_time == null)
+    { return false; }
+$time_limit = false;
+$current_time = date('d.m.Y');
+$task_time = date($date_time);
+$task_time = strtotime($task_time);
+$current_time = date("d.m.Y", strtotime($current_time.'- 1 days'));
+$current_time = strtotime($current_time);
 
-if ($dif['h'] <= 24) {
+if ($current_time > $task_time) {
     $time_limit = true;
+    }
+    return $time_limit;
 }
-return $time_limit;
-}
-
+/* ДЕБАГ ДЛЯ ПРОВЕРКИ!
+<?php echo "<pre>"; print_r(is_hot_task($task['date'])); echo "<pre>"; ?>
+ */
 /**
  * посчитать количество задач в конкретной категории
  *
