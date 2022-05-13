@@ -28,7 +28,7 @@ $tasks = [
     ],
     [
     'name' => 'Встреча с другом',
-    'date' => '22.12.2019',
+    'date' => '12.05.2022',
     'category' => $categories['inbox'],
     'done' => false
     ],
@@ -57,17 +57,17 @@ date_default_timezone_set('Europe/Moscow');
 
 function is_hot_task($date_time) {
     if ($date_time == null)
-    { return false; }
-$time_limit = false;
-$current_time = date('d.m.Y');
-$task_time = date($date_time);
-$task_time = strtotime($task_time);
-$current_time = date("d.m.Y", strtotime($current_time.'- 1 days'));
-$current_time = strtotime($current_time);
+        { return false; }
+    $time_limit = false;
+    $current_time = date('d.m.Y');
+    $task_time = date($date_time);
+    $task_time = strtotime($task_time);
+    $current_time = date("d.m.Y", strtotime($current_time.'- 1 days'));
+    $current_time = strtotime($current_time);
 
-if ($current_time > $task_time) {
-    $time_limit = true;
-    }
+    if ($current_time >= $task_time) {
+        $time_limit = true;
+        }
     return $time_limit;
 }
 /* ДЕБАГ ДЛЯ ПРОВЕРКИ!
