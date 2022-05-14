@@ -10,11 +10,6 @@
 </head>
 
 <body>
-<!--добавляю простой ($categorys) и двухмерный массив ($tasks) -->
-<?php
-//простой ($categories)
-
-?>
 
 <h1 class="visually-hidden">Дела в порядке</h1>
 
